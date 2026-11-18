@@ -7,7 +7,8 @@ Layers (each toggleable with the layer control):
 Inputs: raw trip files + results/preds/hmm_<trip>.parquet (written by `python -m evaluation.hmm_eval`).
 The reference route is used here only for offline visualisation of student_test results, never by the predictor.
 
-    python -m viz.folium_maps --trips 00000077 00000007 00000056
+    python -m viz.folium_maps                      # every student_test trip that has HMM predictions
+    python -m viz.folium_maps --trips <id> <id>    # selected trips
 """
 import argparse
 import os
@@ -105,9 +106,10 @@ def make_prediction_map(trip_id, raw_dir=RAW, pred_dir=PRED, out_dir=OUT, max_ne
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--trips", nargs="+", default=["00000077", "00000007", "00000056"])
+    ap.add_argument("--trips", nargs="+", default=None, help="trip ids (default: all with results/preds/hmm_<id>.parquet)")
     a = ap.parse_args()
-    for t in a.trips:
+    trips = a.trips or sorted(f[4:-8] for f in os.listdir(PRED) if f.startswith("hmm_") and f.endswith(".parquet"))
+    for t in trips:
         _, path, s = make_prediction_map(t)
         print(f"{path}: classifier {s['clf_top1']:.3f} -> HMM {s['hmm_top1']:.3f} ({s['hmm_wrong']} wrong points)")
 
