@@ -1,0 +1,19 @@
+{
+  "best_params": {
+    "n_estimators": 472,
+    "learning_rate": 0.02035728358571882,
+    "num_leaves": 150,
+    "min_child_samples": 14,
+    "subsample": 0.6706040545784924,
+    "colsample_bytree": 0.7745063346021852,
+    "reg_alpha": 0.002219557331139665,
+    "reg_lambda": 0.07797434722363465,
+    "scale_pos_weight": 1.8256435886889408
+  },
+  "best_cv_top1": 0.8734738444369423,
+  "n_trials": 33,
+  "n_complete": 23,
+  "search_seconds": 730.9,
+  "sampler": "TPE",
+  "objective": "mean GroupKFold(3) top-1 accuracy"
+}

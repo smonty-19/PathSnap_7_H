@@ -1,0 +1,41 @@
+{
+  "model_name": "lightgbm_tuned",
+  "feature_columns": [
+    "dist_m",
+    "dist_rank",
+    "dist_minus_min",
+    "dist_ratio_min",
+    "n_cands",
+    "proj_frac",
+    "at_endpoint",
+    "arc_length_m",
+    "heading_diff",
+    "heading_valid",
+    "heading_cos_x_speed",
+    "speed_mps",
+    "dt_prev",
+    "gap_flag",
+    "mean_dist_window",
+    "max_dist_window",
+    "prev_best_connected",
+    "next_best_connected",
+    "arc_out_degree",
+    "arc_in_degree",
+    "has_reverse"
+  ],
+  "params": {
+    "n_estimators": 472,
+    "learning_rate": 0.02035728358571882,
+    "num_leaves": 150,
+    "min_child_samples": 14,
+    "subsample": 0.6706040545784924,
+    "colsample_bytree": 0.7745063346021852,
+    "reg_alpha": 0.002219557331139665,
+    "reg_lambda": 0.07797434722363465,
+    "scale_pos_weight": 1.8256435886889408,
+    "subsample_freq": 1
+  },
+  "trained_on": "train partition (data-quality-filtered)",
+  "seed": 42,
+  "date": "2026-11-18 11:07:39"
+}
