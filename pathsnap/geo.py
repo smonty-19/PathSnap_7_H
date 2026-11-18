@@ -4,7 +4,8 @@ Trips are spread worldwide (lon -100..137, lat -35..62), so we use a *per-trip*
 local equirectangular projection centred on the trip's GPS centroid:
     x = R * cos(lat0) * (lon - lon0),  y = R * (lat - lat0)   [metres]
 For the few-km extent of a single trip the distortion is far below GPS noise
-(<0.1% within ~20 km), and it is much faster than a full UTM transform.
+(relative error ~0.05% median, <=0.2% across a ~50 km trip; centimetres at the <100 m
+scales used for matching), and it is much faster than a full UTM transform.
 """
 import numpy as np
 
