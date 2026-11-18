@@ -19,6 +19,19 @@ Always run `git pull --rebase origin main` before `git push origin main`, and `g
 - Stuck for more than 20 minutes? Ping Monty or Sanchita (Claude Code); they can fix it fast.
 - Understand every line you commit. The viva will ask *you* about EDA, LogReg and the maps.
 
+## ⏰ Before 11:30 (phase-1 evaluation)
+**Already done and pushed:** data pipeline, features, all 5 models trained with the shared harness, model comparison (`results/model_comparison.csv`), and Bayesian tuning of LightGBM (Optuna TPE).
+Your job before 11:30 is to **own and be able to explain your part**. The evaluators will ask *you*.
+
+Setup (10 min): `git pull`, `pip install -r requirements.txt`, then copy the dataset into `data/raw/train` and `data/raw/student_test`.
+
+1. Own **Logistic Regression** (`models/train_logreg.py`): scaled, L2, C=1, balanced. CV Top-1 0.870, test 0.864, log loss 0.167. Train 0.871 vs CV 0.870, **no overfitting** (if anything, slight underfitting, because it is a linear model).
+2. Understand the dataset well enough to explain it: what each file (`.track`, `.nodes`, `.arcs`, `.route`) contains and how they link (row index = id).
+3. If time allows, run **Cell 1 + Cell 2 of E1** below. They produce `results/eda/trip_stats.csv` (points per trip, gaps, speeds, connectivity, route breaks). Pick 2–3 interesting facts to mention, e.g. one trip has 19k points, and trips are in different countries.
+4. Be ready to answer: why we can't use degrees as distances (longitude shrinks with latitude), and why scaling matters for LogReg.
+
+Read the team viva guide shared by Monty (not in the repo) before 11:30.
+
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Depends on |
 |---|---|---|---|---|

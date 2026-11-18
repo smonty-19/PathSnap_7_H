@@ -14,6 +14,24 @@ You push **only** to:
 
 Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
 
+## ⏰ Before 11:30 (phase-1 evaluation)
+**Already done and pushed:** data pipeline, features, all 5 models trained with the shared harness, model comparison (`results/model_comparison.csv`), and Bayesian tuning of LightGBM (Optuna TPE).
+Your job before 11:30 is to **own and be able to explain your part**. The evaluators will ask *you*.
+
+Setup (10 min): `git pull`, `pip install -r requirements.txt`, then copy the dataset into `data/raw/train` and `data/raw/student_test`.
+
+1. Read and own `models/common.py` (harness: GroupKFold(5) by trip → refit → student_test → metrics/logs) and `evaluation/metrics.py` (Top-1, macro F1, log loss, candidate miss rate, route continuity).
+2. Own **LightGBM** (`models/train_lgbm.py`): untuned CV Top-1 0.874, test Top-1 0.883, log loss 0.115, 6 s fit.
+3. Own **Bayesian tuning** (`models/tune_lgbm_optuna.py`):
+   - Optuna **TPE** sampler + MedianPruner.
+   - Objective: mean GroupKFold(3) Top-1.
+   - Search space and its justification, the number of trials, the best params (`results/optuna/best_params.json`), and tuned vs untuned (`results/tuning_comparison.csv`).
+   - Open `results/optuna/optimization_history.png` and `param_importance.png`, and be able to explain them.
+4. Explain **why LightGBM was selected**: best CV and test Top-1 (the primary metric), best route continuity, fast fit (so many Bayesian trials are affordable), a 1.3 MB model file and fast inference.
+5. Remember: **no grid or random search** anywhere, only Bayesian optimisation.
+
+Read the team viva guide shared by Monty (not in the repo) before 11:30.
+
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Unblocks |
 |---|---|---|---|---|

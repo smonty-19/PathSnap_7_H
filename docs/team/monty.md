@@ -16,6 +16,24 @@ You push **only** to:
 
 Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
 
+## ⏰ Before 11:30 (phase-1 evaluation)
+**Already done and pushed:** data pipeline, features, all 5 models trained with the shared harness, model comparison (`results/model_comparison.csv`), and Bayesian tuning of LightGBM (Optuna TPE).
+Your job before 11:30 is to **own and be able to explain your part**. The evaluators will ask *you*.
+
+Setup (10 min): `git pull`, `pip install -r requirements.txt`, then copy the dataset into `data/raw/train` and `data/raw/student_test`.
+
+1. Be ready to present the **pipeline end to end**: `pathsnap/io.py` → `geo.py` (per-trip projection) → `candidates.py` (KD-tree, R=50 m, K=10) → `labels.py` (monotone DP route alignment) → `features.py` (21 features) → `scripts/build_dataset.py`.
+2. Know the numbers:
+   - Candidate miss rate: 0.28% (student_test).
+   - Median GPS-to-aligned-arc distance: about 4.7 m.
+   - Trips 54 and 33 are excluded (median alignment distance > 50 m).
+   - About 14% of candidate rows are positive.
+   - Training uses every 2nd point (stride 2).
+3. Own **KNN** (`models/train_knn.py`): k=25, distance-weighted, scaled, 25% sample. Train Top-1 is 0.991 vs CV 0.865 (overfits), and inference takes about 2 s per trip (too slow for the API).
+4. Lead the overall walkthrough at 11:30: problem → preprocessing → features → 5 models → selection → tuning.
+
+Read the team viva guide shared by Monty (not in the repo) before 11:30.
+
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Unblocks |
 |---|---|---|---|---|

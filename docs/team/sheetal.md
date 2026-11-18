@@ -19,6 +19,20 @@ Always run `git pull --rebase origin main` before `git push origin main`, and `g
 - Stuck for more than 20 minutes? Ping Monty or Sanchita (Claude Code).
 - Understand every line you commit. The viva will ask *you* about the UI, RF, MLP and the comparison plots.
 
+## ⏰ Before 11:30 (phase-1 evaluation)
+**Already done and pushed:** data pipeline, features, all 5 models trained with the shared harness, model comparison (`results/model_comparison.csv`), and Bayesian tuning of LightGBM (Optuna TPE).
+Your job before 11:30 is to **own and be able to explain your part**. The evaluators will ask *you*.
+
+Setup (10 min): `git pull`, `pip install -r requirements.txt`, then copy the dataset into `data/raw/train` and `data/raw/student_test`.
+
+1. Own **Random Forest** (`models/train_rf.py`) and **MLP** (`models/train_mlp.py`). Read the code and the logs in `results/model_runs/random_forest.json` and `mlp.json`.
+   - **RF:** 200 trees, depth 20, min_leaf 5. CV Top-1 0.872, test 0.878, the best CV macro F1 (0.921). Train 0.930 vs CV 0.872 (moderate overfit). Fit takes 65 s and the model file is 71 MB.
+   - **MLP:** 64-32 ReLU, Adam, early stopping, 40% sample. Test Top-1 0.871, the **best log loss (0.096)**. Train 0.886 vs CV 0.869 (small gap; early stopping works).
+2. If time allows, write a quick `evaluation/compare_models.py`. It reads `results/model_comparison.csv` and saves bar charts of CV macro F1 (± std), test Top-1 and macro F1, and log loss to `results/plots/`. This is good visual evidence for the selection.
+3. Be ready to answer: why macro F1 and Top-1 rank models differently (row-level classification vs choosing the best candidate per observation).
+
+Read the team viva guide shared by Monty (not in the repo) before 11:30.
+
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Depends on |
 |---|---|---|---|---|
