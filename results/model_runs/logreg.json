@@ -1,0 +1,103 @@
+{
+  "model": "logreg",
+  "family": "Linear/probabilistic",
+  "config_json": "{\"C\": 1.0, \"penalty\": \"l2\", \"class_weight\": \"balanced\", \"max_iter\": 2000, \"solver\": \"lbfgs\"}",
+  "cv_macro_f1_mean": 0.881177968235613,
+  "cv_macro_f1_std": 0.012568104239083855,
+  "cv_top1_mean": 0.8702906811005733,
+  "cv_top1_std": 0.026117315889772206,
+  "cv_logloss": 0.1707348794370362,
+  "train_top1": 0.8712141912496038,
+  "train_macro_f1": 0.8827354114604016,
+  "test_top1": 0.8636743215031315,
+  "test_macro_f1": 0.8790468331995618,
+  "test_precision": 0.691239845925022,
+  "test_recall": 0.9486548728148225,
+  "test_logloss": 0.1667127774010712,
+  "test_cand_miss_rate": 0.002818371607515635,
+  "test_route_continuity_clf": 0.9479392311166792,
+  "train_time_s": 1.45,
+  "infer_ms_per_trip": 2.99,
+  "train_rows": 587684,
+  "seed": 42,
+  "folds": [
+    {
+      "macro_f1": 0.8723135858234853,
+      "precision": 0.6874167910598298,
+      "recall": 0.9335926798531587,
+      "logloss": 0.19144292866055482,
+      "top1_accuracy": 0.8354272040028281,
+      "candidate_miss_rate": 0.007396530157176229,
+      "fold": 0,
+      "fit_s": 0.94
+    },
+    {
+      "macro_f1": 0.8998820401073293,
+      "precision": 0.7425549803088632,
+      "recall": 0.9509803921568627,
+      "logloss": 0.1472393136068463,
+      "top1_accuracy": 0.8906084729722207,
+      "candidate_miss_rate": 0.017647386294048828,
+      "fold": 1,
+      "fit_s": 0.96
+    },
+    {
+      "macro_f1": 0.873904697360715,
+      "precision": 0.6834224145244762,
+      "recall": 0.9398005016624862,
+      "logloss": 0.16720831846154455,
+      "top1_accuracy": 0.848947277838334,
+      "candidate_miss_rate": 0.01652228787791865,
+      "fold": 2,
+      "fit_s": 1.27
+    },
+    {
+      "macro_f1": 0.8884742599524051,
+      "precision": 0.7128069442510329,
+      "recall": 0.9451591062965471,
+      "logloss": 0.1487354785074056,
+      "top1_accuracy": 0.8876749324821999,
+      "candidate_miss_rate": 0.0027620918242081682,
+      "fold": 3,
+      "fit_s": 1.2
+    },
+    {
+      "macro_f1": 0.8713152579341303,
+      "precision": 0.6842929494868719,
+      "recall": 0.9596280547637961,
+      "logloss": 0.19904835794882975,
+      "top1_accuracy": 0.8887955182072829,
+      "candidate_miss_rate": 0.0008870214752567662,
+      "fold": 4,
+      "fit_s": 1.0
+    }
+  ],
+  "features": [
+    "dist_m",
+    "dist_rank",
+    "dist_minus_min",
+    "dist_ratio_min",
+    "n_cands",
+    "proj_frac",
+    "at_endpoint",
+    "arc_length_m",
+    "heading_diff",
+    "heading_valid",
+    "heading_cos_x_speed",
+    "speed_mps",
+    "dt_prev",
+    "gap_flag",
+    "mean_dist_window",
+    "max_dist_window",
+    "prev_best_connected",
+    "next_best_connected",
+    "arc_out_degree",
+    "arc_in_degree",
+    "has_reverse"
+  ],
+  "excluded_train_trips": [
+    "00000033",
+    "00000054"
+  ],
+  "timestamp": "2026-11-18 10:52:18"
+}
