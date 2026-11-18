@@ -14,3 +14,4 @@ Training scripts. Every script calls `models.common.run_experiment(...)`. Only e
 | `train_gnb.py` | **Patil** (optional): Gaussian Naive Bayes |
 | `train_rf.py` | **Sheetal**: Random Forest |
 | `train_mlp.py` | **Sheetal**: MLP + real train/val loss curves |
+| `train_svm.py` | **Monty**: Kernel SVM (Nystroem RBF + calibrated linear SVM) |

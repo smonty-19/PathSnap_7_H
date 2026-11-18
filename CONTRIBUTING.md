@@ -3,7 +3,7 @@
 ## Folder ownership
 | Person | Push ONLY to |
 |---|---|
-| **Monty** | `pathsnap/`, `scripts/`, `configs/`, `evaluation/hmm_eval.py`, `README.md`, `requirements.txt`, `.gitignore`, `docs/`, `results/` (candidate + HMM outputs) |
+| **Monty** | `pathsnap/`, `scripts/`, `configs/`, `evaluation/hmm_eval.py`, `models/train_svm.py`, `README.md`, `requirements.txt`, `.gitignore`, `docs/`, `results/` (candidate + HMM outputs) |
 | **Sanchita** | `api/`, `models/common.py`, `models/train_lgbm.py`, `models/tune_lgbm_optuna.py`, `evaluation/metrics.py`, `artifacts/`, `results/` (harness, LightGBM, Optuna outputs) |
 | **Sheetal** | `ui/`, `models/train_rf.py`, `models/train_mlp.py`, `evaluation/compare_models.py`, `report/REPORT.md` + final PDF, `results/plots/` (comparison plots, MLP loss) |
 | **Patil** | `eda/`, `viz/`, `models/train_logreg.py`, `models/train_knn.py`, `models/train_gnb.py`, `results/eda/`, `results/maps/` |

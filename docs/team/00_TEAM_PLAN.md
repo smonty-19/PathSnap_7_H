@@ -4,7 +4,7 @@ Read this file first, then your own file:
 
 | Member | File | Tools | Owns |
 |---|---|---|---|
-| **Monty** | [`monty.md`](monty.md) | Claude Code | Data pipeline (load → candidates → labels → features), HMM/Viterbi, inference pipeline, repo/README |
+| **Monty** | [`monty.md`](monty.md) | Claude Code | Data pipeline (load → candidates → labels → features), HMM/Viterbi, Kernel SVM model, inference pipeline, repo/README |
 | **Sanchita** | [`sanchita.md`](sanchita.md) | Claude Code | Metrics + training harness, LightGBM, Bayesian optimisation (Optuna), final model export, FastAPI backend (Laptop 1) |
 | **Patil** | [`patil.md`](patil.md) | Free AI tools | EDA, Logistic Regression + KNN, Folium maps module |
 | **Sheetal** | [`sheetal.md`](sheetal.md) | Free AI tools | Streamlit UI (Laptop 2), Random Forest + MLP, model-comparison plots, report assembly |
@@ -45,9 +45,9 @@ A FastAPI server (Laptop 1) runs this on any of the 10 evaluator trips. A UI (La
   - **Route continuity:** fraction of consecutive predicted arcs that are the same arc or directly connected.
   - **Training time and inference time** (ms per trip).
 
-## 3. The 5 models (and why these 5)
+## 3. The 6 models (and why these)
 
-They come from five different algorithm families in the guide, and each tests a different hypothesis.
+They come from six different algorithm families in the guide, and each tests a different hypothesis. The guide requires at least 5, so a sixth gives us a buffer.
 
 | # | Model | Family | Owner | Why it's in the set |
 |---|---|---|---|---|
@@ -56,10 +56,10 @@ They come from five different algorithm families in the guide, and each tests a 
 | 3 | **Random Forest** | Ensemble (bagging) | Sheetal | Strong non-linear model, robust, little tuning, gives feature importances. |
 | 4 | **MLP** (2 hidden layers, early stopping) | Neural network | Sheetal | Non-linear representation. Has **real epoch-wise train/val loss curves**, which the report needs. |
 | 5 | **LightGBM** | Boosting | Sanchita | Expected best: fast, handles class imbalance, good probabilities, small model file. **Candidate for Bayesian tuning.** |
+| 6 | **Kernel SVM** (RBF via Nystroem approximation + linear SVM, calibrated) | Kernel-based | Monty | Tests whether a smooth non-linear kernel boundary is enough. An exact RBF SVM is O(n²) on about 1M rows, so a Nystroem approximation makes it trainable. Probabilities come from calibration, which shows the "probability quality" trade-off. |
 
-Optional 6th model if time allows (cheap): Gaussian Naive Bayes (Patil).
+Optional extra model if time allows (cheap): Gaussian Naive Bayes (Patil).
 Not chosen:
-- **SVM:** O(n²) on about 1M rows, and probabilities need extra Platt calibration.
 - **Clustering:** produces no supervised probabilities.
 
 We pick the final model **from the measured results**, not this prediction. If RF or MLP wins on CV Top-1 and log loss, we tune that one instead.
@@ -142,6 +142,7 @@ PathSnap_7_H/
 │                       tune_lgbm_optuna.py          Sanchita
 │                       train_logreg.py, train_knn.py Patil
 │                       train_rf.py, train_mlp.py    Sheetal
+│                       train_svm.py                 Monty
 ├── eda/                notebooks + DATA_NOTES.md   Patil
 ├── viz/                folium_maps.py              Patil
 ├── api/                FastAPI app                 Sanchita

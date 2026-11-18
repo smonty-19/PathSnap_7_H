@@ -24,7 +24,7 @@ Always run `git pull --rebase origin main` before `git push origin main`, and `g
 |---|---|---|---|---|
 | P1 | Evaluator UI (Streamlit) | `ui/app.py`, `ui/mock_response.json`, `ui/README.md` | **1, start now (mock)** → 2 (real API) | API contract only; Sanchita's API for the final hookup |
 | P2 | Random Forest + MLP | `models/train_rf.py`, `models/train_mlp.py`, `results/plots/mlp_loss.png` | 1–2 | Sanchita's harness + Monty's parquet |
-| P3 | Model-comparison plots | `evaluation/compare_models.py`, `results/plots/*.png` | 2 | `results/model_comparison.csv` (all 5 models) |
+| P3 | Model-comparison plots | `evaluation/compare_models.py`, `results/plots/*.png` | 2 | `results/model_comparison.csv` (all models) |
 | R | Report: §3.1 table, §3.3 plots, §7 (UI + API screenshots), RF & MLP subsections in §3.2 | `report/sections/` | 2 | — |
 | P4 | **Report assembly** (one consolidated PDF) | `report/` | 2 (start the skeleton in phase 1) | everyone's sections |
 
