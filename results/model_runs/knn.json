@@ -16,8 +16,8 @@
   "test_logloss": 0.14345668814760743,
   "test_cand_miss_rate": 0.002818371607515635,
   "test_route_continuity_clf": 0.942769645564904,
-  "train_time_s": 0.07,
-  "infer_ms_per_trip": 2025.96,
+  "train_time_s": 0.06,
+  "infer_ms_per_trip": 1430.83,
   "train_rows": 147016,
   "seed": 42,
   "folds": [
@@ -29,7 +29,7 @@
       "top1_accuracy": 0.8677786818551668,
       "candidate_miss_rate": 0.0024410089503661414,
       "fold": 0,
-      "fit_s": 0.05
+      "fit_s": 0.04
     },
     {
       "macro_f1": 0.9206572996861977,
@@ -59,7 +59,7 @@
       "top1_accuracy": 0.8093346573982125,
       "candidate_miss_rate": 0.020605759682224445,
       "fold": 3,
-      "fit_s": 0.04
+      "fit_s": 0.05
     },
     {
       "macro_f1": 0.9301302484256724,
@@ -99,5 +99,5 @@
     "00000033",
     "00000054"
   ],
-  "timestamp": "2026-11-18 10:53:09"
+  "timestamp": "2026-11-18 11:40:11"
 }
