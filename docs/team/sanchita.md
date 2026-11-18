@@ -3,6 +3,17 @@
 **Tools:** Claude Code. Your harness is what Patil and Sheetal plug their models into, so **keep it simple to call and ship it early**.
 Read [`00_TEAM_PLAN.md`](00_TEAM_PLAN.md) first (contracts in §4.1–4.3).
 
+## Where you push
+You push **only** to:
+- `api/` (whole folder)
+- `models/common.py`, `models/train_lgbm.py`, `models/tune_lgbm_optuna.py`
+- `evaluation/metrics.py`
+- `artifacts/` (final model + `model_meta.json`)
+- `results/model_comparison.csv`, `results/model_runs/`, `results/preds/` for LightGBM runs, `results/optuna/`, `results/tuning_comparison.csv`, `results/plots/lgbm_*`
+- `report/sections/4_bayesian_opt.md`, `report/sections/3_models_lightgbm.md`, API part of `report/sections/7_api_ui.md`
+
+Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
+
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Unblocks |
 |---|---|---|---|---|

@@ -3,6 +3,16 @@
 **Tools:** free AI tools (no Pro). Your UI needs **only the API contract** below, so you can start immediately in mock mode.
 Read [`00_TEAM_PLAN.md`](00_TEAM_PLAN.md) §1–3 first (5 minutes).
 
+## Where you push
+You push **only** to:
+- `ui/` (whole folder)
+- `models/train_rf.py`, `models/train_mlp.py`
+- `evaluation/compare_models.py`
+- `results/plots/` (comparison plots, `rf_importance.png`, `mlp_loss.png`), plus the outputs of your own RF/MLP runs in `results/`
+- `report/REPORT.md`, `report/PathSnap_7_H_Report.pdf`, `report/sections/3_1_3_3_comparison.md`, `report/sections/7_api_ui.md`, `report/sections/3_models_rf.md`, `report/sections/3_models_mlp.md`
+
+Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
+
 ### How to use a free AI assistant efficiently
 - Paste **only the section you're working on** plus your error message, and ask for one function at a time.
 - Test with small data first (2–3 trips, or `train_sample_frac=0.1`).

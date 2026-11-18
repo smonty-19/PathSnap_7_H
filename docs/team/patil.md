@@ -3,6 +3,16 @@
 **Tools:** free AI tools (no Pro). Every task below comes with ready-to-run code. Fill in the blanks, run it, look at the output, and write down what you notice.
 Read [`00_TEAM_PLAN.md`](00_TEAM_PLAN.md) §1–3 first (5 minutes).
 
+## Where you push
+You push **only** to:
+- `eda/` (whole folder)
+- `viz/` (whole folder)
+- `models/train_logreg.py`, `models/train_knn.py`, `models/train_gnb.py`
+- `results/eda/`, `results/maps/`, plus the outputs of your own LogReg/KNN runs in `results/`
+- `report/sections/2_2_eda.md` (EDA part, shared with Monty), `report/sections/6_folium.md`, `report/sections/3_models_logreg.md`, `report/sections/3_models_knn.md`
+
+Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
+
 ### How to use a free AI assistant efficiently
 - Paste **only the section you're working on** plus your error message, and ask for **one function at a time**.
 - Run on 2–3 trips first, then on all trips.

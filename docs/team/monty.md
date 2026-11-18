@@ -3,6 +3,18 @@
 **Tools:** Claude Code. **You are on the critical path.** Everyone's models wait for your features parquet, so ship a *sample* parquet early.
 Read [`00_TEAM_PLAN.md`](00_TEAM_PLAN.md) first (contracts in §4).
 
+## Where you push
+You push **only** to:
+- `pathsnap/` (whole folder)
+- `scripts/`
+- `configs/`
+- `evaluation/hmm_eval.py`
+- `README.md`, `requirements.txt`, `.gitignore`, `CONTRIBUTING.md`, `docs/`
+- `results/candidates_sweep.csv`, `results/hmm_comparison.csv`, `results/hmm_tuning.csv`, `results/preds/hmm_*.parquet`
+- `report/sections/2_2_eda.md` (preprocessing/features part, shared with Patil), `report/sections/5_hmm.md`
+
+Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
+
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Unblocks |
 |---|---|---|---|---|
