@@ -2,7 +2,7 @@ numpy
 pandas
 pyarrow
 scipy
-scikit-learn
+scikit-learn==1.7.2   # final_model.joblib was saved with 1.7.2; other versions may warn or fail to load it
 lightgbm
 optuna
 networkx
