@@ -16,8 +16,8 @@
   "test_logloss": 0.09567414159430133,
   "test_cand_miss_rate": 0.002818371607515635,
   "test_route_continuity_clf": 0.9541380063717867,
-  "train_time_s": 51.52,
-  "infer_ms_per_trip": 8.12,
+  "train_time_s": 86.74,
+  "infer_ms_per_trip": 11.11,
   "train_rows": 235467,
   "seed": 42,
   "folds": [
@@ -29,7 +29,7 @@
       "top1_accuracy": 0.834057684709601,
       "candidate_miss_rate": 0.011062821019359959,
       "fold": 0,
-      "fit_s": 32.21
+      "fit_s": 13.49
     },
     {
       "macro_f1": 0.9373282132879133,
@@ -39,7 +39,7 @@
       "top1_accuracy": 0.9024541783162473,
       "candidate_miss_rate": 0.002329916123019582,
       "fold": 1,
-      "fit_s": 39.96
+      "fit_s": 34.47
     },
     {
       "macro_f1": 0.927448441351392,
@@ -49,7 +49,7 @@
       "top1_accuracy": 0.87976011994003,
       "candidate_miss_rate": 0.002548725637181448,
       "fold": 2,
-      "fit_s": 50.73
+      "fit_s": 93.66
     },
     {
       "macro_f1": 0.8938504477589923,
@@ -59,7 +59,7 @@
       "top1_accuracy": 0.8358706684065536,
       "candidate_miss_rate": 0.024503407278526845,
       "fold": 3,
-      "fit_s": 80.42
+      "fit_s": 47.17
     },
     {
       "macro_f1": 0.9355455568712404,
@@ -69,7 +69,7 @@
       "top1_accuracy": 0.8916546282920325,
       "candidate_miss_rate": 0.008223135903989376,
       "fold": 4,
-      "fit_s": 61.17
+      "fit_s": 51.3
     }
   ],
   "features": [
@@ -99,5 +99,5 @@
     "00000033",
     "00000054"
   ],
-  "timestamp": "2026-11-18 10:58:32"
+  "timestamp": "2026-11-18 11:45:57"
 }
