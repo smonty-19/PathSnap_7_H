@@ -1,0 +1,3 @@
+# Candidate generation (used by scripts/build_dataset.py defaults and pathsnap.pipeline)
+radius_m: 50.0   # search radius around each GPS point (retried with 2x if empty)
+k_max: 10        # keep the K nearest arcs

@@ -1,0 +1,8 @@
+# Tuned with Optuna TPE on train OOF (lightgbm_tuned), 40 trials, best train-subset Top-1 0.9416 (default 0.9248).
+back_penalty_m: 3.017727473936506
+beta_m: 33.8690088032516
+eps: 9.392578510365213e-05
+gap_s: 19.611988336682863
+max_m: 300.0
+sigma_m: 26.56396605637706
+w: 0.057068546935477193
