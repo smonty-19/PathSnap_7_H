@@ -13,6 +13,7 @@
 | `07_model_lightgbm.ipynb` | **Sanchita** | Model 5: LightGBM (untuned baseline) |
 | `08_model_comparison_and_selection.ipynb` | **Sheetal** | Comparison plots across all 5 models + selection |
 | `09_bayesian_hyperparameter_tuning.ipynb` | **Sanchita** | Optuna TPE search record, best params, tuned vs untuned |
+| `10_prediction_maps.ipynb` | **Patil** | Folium maps of classifier-only vs HMM predictions + per-trip HMM gain (report §6) |
 
-Run order: build the datasets first (`python -m scripts.build_dataset --split train --stride 2` and `--split student_test`), then 01 → 09.
+Run order: build the datasets first (`python -m scripts.build_dataset --split train --stride 2` and `--split student_test`), then 01 → 09. Notebook 10 needs `python -m evaluation.hmm_eval` to have been run first.
 To re-execute a notebook in place: `jupyter nbconvert --to notebook --execute --inplace <notebook>`.

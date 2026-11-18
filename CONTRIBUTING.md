@@ -6,7 +6,7 @@
 | **Monty** | `pathsnap/`, `scripts/`, `configs/`, `evaluation/hmm_eval.py`, `models/train_knn.py`, `notebooks/02_*`, `notebooks/04_*`, `notebooks/README.md`, `README.md`, `requirements.txt`, `.gitignore`, `docs/`, `results/` (candidate + HMM outputs) |
 | **Sanchita** | `api/`, `models/common.py`, `models/train_lgbm.py`, `models/tune_lgbm_optuna.py`, `evaluation/metrics.py`, `notebooks/07_*`, `notebooks/09_*`, `artifacts/`, `results/` (harness, LightGBM, Optuna outputs) |
 | **Sheetal** | `ui/`, `models/train_rf.py`, `models/train_mlp.py`, `evaluation/compare_models.py`, `notebooks/05_*`, `notebooks/06_*`, `notebooks/08_*`, `report/REPORT.md` + final PDF, `results/plots/` (comparison plots, MLP loss) |
-| **Patil** | `eda/`, `viz/`, `models/train_logreg.py`, `notebooks/03_*`, `results/eda/`, `results/maps/` |
+| **Patil** | `eda/`, `viz/`, `models/train_logreg.py`, `notebooks/03_*`, `notebooks/10_*`, `results/eda/`, `results/maps/` |
 | **Everyone** | your own file(s) in `report/sections/` |
 
 Need a change in someone else's folder? **Ask them in the chat**, don't edit it yourself.
