@@ -1,0 +1,4 @@
+[knn] train rows=147,016 trips=78 | test rows=131,630
+[knn] CV macroF1=0.9188±0.0153 CV top1=0.8649 | test top1=0.8626 macroF1=0.9162 logloss=0.1435 cont=0.9428 | fit 0.1s, infer 2026 ms/trip
+[mlp] train rows=235,467 trips=78 | test rows=131,630
+[mlp] CV macroF1=0.9193±0.0199 CV top1=0.8688 | test top1=0.8707 macroF1=0.9223 logloss=0.0957 cont=0.9541 | fit 51.5s, infer 8 ms/trip

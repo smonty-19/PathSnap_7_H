@@ -1,0 +1,6 @@
+[logreg] train rows=587,684 trips=78 | test rows=131,630
+[logreg] CV macroF1=0.8812±0.0126 CV top1=0.8703 | test top1=0.8637 macroF1=0.8790 logloss=0.1667 cont=0.9479 | fit 1.5s, infer 3 ms/trip
+[lightgbm] train rows=587,684 trips=78 | test rows=131,630
+[lightgbm] CV macroF1=0.9114±0.0130 CV top1=0.8737 | test top1=0.8827 macroF1=0.9133 logloss=0.1149 cont=0.9547 | fit 5.9s, infer 42 ms/trip
+[random_forest] train rows=587,684 trips=78 | test rows=131,630
+[random_forest] CV macroF1=0.9209±0.0129 CV top1=0.8719 | test top1=0.8775 macroF1=0.9212 logloss=0.1034 cont=0.9497 | fit 64.8s, infer 41 ms/trip
