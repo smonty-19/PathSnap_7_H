@@ -57,8 +57,18 @@ python -m evaluation.hmm_eval                               # writes results/hmm
 
 # 5. model comparison plots
 python -m evaluation.compare_models
+
+# 6. Folium prediction maps (GPS, network, reference, classifier-only, HMM) -> results/maps/prediction_<trip>.html
+python -m viz.folium_maps
 ```
-Notebooks `notebooks/02` to `09` walk through preprocessing, each model, the comparison and the tuning.
+Notebooks (outputs saved): `eda/01_eda.ipynb` (EDA), then `notebooks/02` to `10`: preprocessing & features, one notebook per model,
+comparison & selection, Bayesian tuning, prediction maps. Index with owners: [`notebooks/README.md`](notebooks/README.md).
+
+## Tests
+```bash
+python -m pytest -q api/test_api.py                    # API contract: 404s, response fields, no ground truth in responses
+uvicorn api.main:app --port 8000 & python -m pytest -q ui/test_ui.py    # UI against a running API
+```
 
 ## Run the demo (two laptops, same Wi-Fi or hotspot)
 **Laptop 1 (API):**

@@ -6,11 +6,8 @@ scikit-learn==1.7.2   # final_model.joblib was saved with 1.7.2; other versions 
 lightgbm
 optuna
 networkx
-pyproj
-shapely>=2.0
 folium
 matplotlib
-seaborn
 joblib
 pyyaml
 jupyter
@@ -19,3 +16,5 @@ uvicorn[standard]
 requests
 streamlit
 streamlit-folium
+pytest
+httpx
