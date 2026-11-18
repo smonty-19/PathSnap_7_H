@@ -90,12 +90,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from models.common import run_experiment
 
-for k in [5, 25, 75]:
-    cfg = dict(n_neighbors=k, weights="distance")
-    est = make_pipeline(StandardScaler(), KNeighborsClassifier(**cfg, n_jobs=-1))
-    run_experiment(f"knn_k{k}", "Instance-based", est, cfg, train_sample_frac=0.2)
+cfg = dict(n_neighbors=25, weights="distance")
+est = make_pipeline(StandardScaler(), KNeighborsClassifier(**cfg, n_jobs=-1))
+run_experiment("knn", "Instance-based", est, cfg, train_sample_frac=0.25)
 ```
-(KNN is slow at prediction time, which is why it trains on a 20% sample. Mention this in the report.) Pick the best k for the main table.
+(KNN is slow at prediction time, which is why it trains on a 20% sample. Mention this in the report.) One fixed configuration. **No grid or random search** (organiser rule).
 - For the report: why similarity in feature space suits the problem, why scaling matters, the objective (none; a distance-weighted majority vote), the inference-time cost, student-test Top-1/F1/log loss, and over- or underfitting evidence (small k overfits, large k underfits; compare CV vs student-test).
 
 ## Dependencies

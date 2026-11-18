@@ -112,7 +112,7 @@ cfg = dict(C=1.0, class_weight="balanced", max_iter=1000)
 est = make_pipeline(StandardScaler(), LogisticRegression(**cfg, random_state=42))
 run_experiment("logreg", "Linear/probabilistic", est, cfg)
 ```
-Also try C ∈ {0.01, 0.1, 1, 10} and keep a small table of the results. Pick the best C for the main table.
+Use one fixed, justified configuration. **No grid or random search** (organiser rule): only the selected model is tuned, with Bayesian optimisation.
 
 For the report, write down:
 - Why it suits the problem.

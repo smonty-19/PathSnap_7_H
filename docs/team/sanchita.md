@@ -53,6 +53,7 @@ Steps:
 `LGBMClassifier(n_estimators=400, learning_rate=0.05, num_leaves=63, class_weight="balanced" or scale_pos_weight, random_state=42)` → `run_experiment("lightgbm", "Boosting", ...)`. Also save feature importances (gain) to `results/plots/lgbm_importance.png` for the report.
 
 ## S2: Bayesian optimisation (`models/tune_lgbm_optuna.py`)
+- **Organiser rule: Bayesian optimisation only. No grid or random search anywhere.**
 - Tune the model that wins the comparison table. Expected: LightGBM. If RF or MLP clearly wins, tune that one instead and adapt the search space.
 - **Sampler:** Optuna `TPESampler(seed=42)` (Bayesian, tree-structured Parzen estimator), with `MedianPruner`.
 - **Objective:** mean GroupKFold(5) **CV observation-level Top-1 accuracy** on the 80 train trips. Also log macro F1 and log loss per trial. Justify Top-1 as the primary metric: it is what the route depends on.
