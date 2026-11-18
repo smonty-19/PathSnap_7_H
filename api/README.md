@@ -47,5 +47,13 @@ Interactive docs: `http://localhost:8000/docs`.
 ## Known notes
 - `artifacts/final_model.joblib` was pickled with scikit-learn 1.7.2. Newer versions print an `InconsistentVersionWarning`
   while loading; the model still works. Pin `scikit-learn==1.7.2` in `requirements.txt` to silence it (Monty owns that file).
-- Measured on the 10 student_test trips (one laptop, no network): 60 ms to 720 ms per trip end to end
-  (`timing_ms.total`), including the 3,958-point trip. The largest training trip (19,313 points) takes about 2.3 s for the prediction plus 0.7 s for the metrics.
+- Measured on the 10 student_test trips (one laptop, localhost): 86 ms to 1,118 ms round trip; server `timing_ms.total` 77 ms to 1,080 ms, which includes
+  the server-side metric computation. The largest training trip (19,313 points) takes about 2.3 s for the prediction plus 0.7 s for the metrics.
+
+## Tests and rehearsal
+```bash
+pip install pytest httpx
+python -m pytest api/test_api.py -q                                   # 12 contract tests
+python -m api.rehearse --url http://<laptop1-ip>:8000                 # run every trip through a live API, writes results/api_rehearsal.csv
+```
+Run the rehearsal from Laptop 2 with the real URL to record the timings including the network (needed for report section 7).
