@@ -4,9 +4,9 @@ Read this file first, then your own file:
 
 | Member | File | Tools | Owns |
 |---|---|---|---|
-| **Monty** | [`monty.md`](monty.md) | Claude Code | Data pipeline (load → candidates → labels → features), HMM/Viterbi, Kernel SVM model, inference pipeline, repo/README |
+| **Monty** | [`monty.md`](monty.md) | Claude Code | Data pipeline (load → candidates → labels → features), HMM/Viterbi, KNN model, inference pipeline, repo/README |
 | **Sanchita** | [`sanchita.md`](sanchita.md) | Claude Code | Metrics + training harness, LightGBM, Bayesian optimisation (Optuna), final model export, FastAPI backend (Laptop 1) |
-| **Patil** | [`patil.md`](patil.md) | Free AI tools | EDA, Logistic Regression + KNN, Folium maps module |
+| **Patil** | [`patil.md`](patil.md) | Free AI tools | EDA, Logistic Regression, Folium maps module |
 | **Sheetal** | [`sheetal.md`](sheetal.md) | Free AI tools | Streamlit UI (Laptop 2), Random Forest + MLP, model-comparison plots, report assembly |
 
 Patil's and Sheetal's tasks need no deep knowledge of the rest of the codebase. Each one depends only on a small **contract** (a file format or a function signature) that is written out in full in their file. Each file also has starter code, so the free AI tiers are enough.
@@ -45,21 +45,20 @@ A FastAPI server (Laptop 1) runs this on any of the 10 evaluator trips. A UI (La
   - **Route continuity:** fraction of consecutive predicted arcs that are the same arc or directly connected.
   - **Training time and inference time** (ms per trip).
 
-## 3. The 6 models (and why these)
+## 3. The 5 models (and why these 5)
 
-They come from six different algorithm families in the guide, and each tests a different hypothesis. The guide requires at least 5, so a sixth gives us a buffer.
+They come from five different algorithm families in the guide, and each tests a different hypothesis. Every team member owns at least one.
 
 | # | Model | Family | Owner | Why it's in the set |
 |---|---|---|---|---|
 | 1 | **Logistic Regression** (balanced class weight, scaled) | Linear / probabilistic | Patil | Calibrated, interpretable baseline. Tests whether a linear decision boundary is enough. |
-| 2 | **KNN, distance-weighted** (scaled) | Instance-based | Patil | Tests similarity in feature space. Shows the cost of scaling and inference time on about 1M rows. |
+| 2 | **KNN, distance-weighted** (scaled) | Instance-based | Monty | Tests similarity in feature space. Shows the cost of scaling and inference time on about 1M rows. |
 | 3 | **Random Forest** | Ensemble (bagging) | Sheetal | Strong non-linear model, robust, little tuning, gives feature importances. |
 | 4 | **MLP** (2 hidden layers, early stopping) | Neural network | Sheetal | Non-linear representation. Has **real epoch-wise train/val loss curves**, which the report needs. |
 | 5 | **LightGBM** | Boosting | Sanchita | Expected best: fast, handles class imbalance, good probabilities, small model file. **Candidate for Bayesian tuning.** |
-| 6 | **Kernel SVM** (RBF via Nystroem approximation + linear SVM, calibrated) | Kernel-based | Monty | Tests whether a smooth non-linear kernel boundary is enough. An exact RBF SVM is O(n²) on about 1M rows, so a Nystroem approximation makes it trainable. Probabilities come from calibration, which shows the "probability quality" trade-off. |
 
-Optional extra model if time allows (cheap): Gaussian Naive Bayes (Patil).
 Not chosen:
+- **SVM:** O(n²) on about 1M rows, and probabilities need extra Platt calibration.
 - **Clustering:** produces no supervised probabilities.
 
 We pick the final model **from the measured results**, not this prediction. If RF or MLP wins on CV Top-1 and log loss, we tune that one instead.
@@ -140,9 +139,9 @@ PathSnap_7_H/
 │                       compare_models.py           Sheetal
 ├── models/             common.py, train_lgbm.py,
 │                       tune_lgbm_optuna.py          Sanchita
-│                       train_logreg.py, train_knn.py Patil
+│                       train_logreg.py              Patil
 │                       train_rf.py, train_mlp.py    Sheetal
-│                       train_svm.py                 Monty
+│                       train_knn.py                 Monty
 ├── eda/                notebooks + DATA_NOTES.md   Patil
 ├── viz/                folium_maps.py              Patil
 ├── api/                FastAPI app                 Sanchita
@@ -165,7 +164,7 @@ PathSnap_7_H/
 Monty M0 (repo skeleton, 45 min) ──► Monty M1 (features parquet) ─────────┐
            │                              │ (sample parquet early)         │
            │                              ▼                                ▼
-Sanchita S0 (metrics + harness) ──► Patil LR/KNN, Sheetal RF/MLP, Sanchita LightGBM
+Sanchita S0 (metrics + harness) ──► Patil LR, Monty KNN, Sheetal RF/MLP, Sanchita LightGBM
                                                      │
                                                      ▼
                         Sheetal compare plots ◄── results/model_comparison.csv
@@ -193,7 +192,7 @@ Patil Folium maps of predictions ◄── Monty HMM outputs                    
 |---|---|
 | Monty | HMM/Viterbi + classifier-vs-HMM comparison. `pipeline.predict_trip`. README. |
 | Sanchita | Optuna study, tuned vs untuned comparison, final model export, real `/predict`, 2-laptop test. |
-| Patil | KNN (+ optional GNB). `folium_maps.py` with predicted vs reference maps. Report sections. |
+| Patil | `folium_maps.py` with predicted vs reference maps. Report sections. |
 | Sheetal | MLP loss curves, `compare_models.py` plots, UI wired to the real API, screenshots, report assembly. |
 
 ### Hand-off signals (post in the team chat)

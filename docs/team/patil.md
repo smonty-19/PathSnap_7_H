@@ -1,4 +1,4 @@
-# Patil: EDA, Logistic Regression + KNN, Folium Maps
+# Patil: EDA, Logistic Regression, Folium Maps
 
 **Tools:** free AI tools (no Pro). Every task below comes with ready-to-run code. Fill in the blanks, run it, look at the output, and write down what you notice.
 Read [`00_TEAM_PLAN.md`](00_TEAM_PLAN.md) §1–3 first (5 minutes).
@@ -7,9 +7,9 @@ Read [`00_TEAM_PLAN.md`](00_TEAM_PLAN.md) §1–3 first (5 minutes).
 You push **only** to:
 - `eda/` (whole folder)
 - `viz/` (whole folder)
-- `models/train_logreg.py`, `models/train_knn.py`, `models/train_gnb.py`
-- `results/eda/`, `results/maps/`, plus the outputs of your own LogReg/KNN runs in `results/`
-- `report/sections/2_2_eda.md` (EDA part, shared with Monty), `report/sections/6_folium.md`, `report/sections/3_models_logreg.md`, `report/sections/3_models_knn.md`
+- `models/train_logreg.py`
+- `results/eda/`, `results/maps/`, plus the outputs of your own LogReg runs in `results/`
+- `report/sections/2_2_eda.md` (EDA part, shared with Monty), `report/sections/6_folium.md`, `report/sections/3_models_logreg.md`
 
 Always run `git pull --rebase origin main` before `git push origin main`, and `git add` only your own files. Need a change outside your folders? Ask the owner. Full rules: [`CONTRIBUTING.md`](../../CONTRIBUTING.md).
 
@@ -17,15 +17,15 @@ Always run `git pull --rebase origin main` before `git push origin main`, and `g
 - Paste **only the section you're working on** plus your error message, and ask for **one function at a time**.
 - Run on 2–3 trips first, then on all trips.
 - Stuck for more than 20 minutes? Ping Monty or Sanchita (Claude Code); they can fix it fast.
-- Understand every line you commit. The viva will ask *you* about EDA, LogReg, KNN and the maps.
+- Understand every line you commit. The viva will ask *you* about EDA, LogReg and the maps.
 
 ## Summary of deliverables
 | ID | Deliverable | Files | Phase | Depends on |
 |---|---|---|---|---|
 | E1 | Exploratory data analysis | `eda/01_eda.ipynb`, `eda/DATA_NOTES.md`, `results/eda/*` | **1, start now** | nothing |
-| E2 | Logistic Regression + KNN (+ optional GaussianNB) | `models/train_logreg.py`, `models/train_knn.py`, (`models/train_gnb.py`) | 1–2 | Sanchita's harness + Monty's parquet |
+| E2 | Logistic Regression | `models/train_logreg.py` | 1–2 | Sanchita's harness + Monty's parquet |
 | E3 | Folium map module + prediction maps | `viz/folium_maps.py`, `results/maps/*.html` | 2 | Monty's HMM preds (for the predicted layer) |
-| R | Your report sections: §2.2 EDA plots/tables, §6 Folium, LogReg & KNN subsections in §3.2. Send them to **Sheetal**, who assembles the PDF. | `report/sections/` | 2 | — |
+| R | Your report sections: §2.2 EDA plots/tables, §6 Folium, LogReg subsection in §3.2. Send them to **Sheetal**, who assembles the PDF. | `report/sections/` | 2 | — |
 
 ---
 
@@ -112,26 +112,13 @@ cfg = dict(C=1.0, class_weight="balanced", max_iter=1000)
 est = make_pipeline(StandardScaler(), LogisticRegression(**cfg, random_state=42))
 run_experiment("logreg", "Linear/probabilistic", est, cfg)
 ```
-`models/train_knn.py`:
-```python
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier
-from models.common import run_experiment
+Also try C ∈ {0.01, 0.1, 1, 10} and keep a small table of the results. Pick the best C for the main table.
 
-for k in [5, 25, 75]:
-    cfg = dict(n_neighbors=k, weights="distance")
-    est = make_pipeline(StandardScaler(), KNeighborsClassifier(**cfg, n_jobs=-1))
-    run_experiment(f"knn_k{k}", "Instance-based", est, cfg, train_sample_frac=0.2)
-```
-(KNN is slow at prediction time, which is why it trains on a 20% sample. Mention this in the report.) Pick the best k for the main table.
-Optional: `models/train_gnb.py`, the same shape with `GaussianNB()` (adds a 6th model in 2 minutes).
-
-For the report, write down for each model:
+For the report, write down:
 - Why it suits the problem.
 - Strengths and limitations **as seen in your numbers**.
 - The hyperparameters.
-- The loss or objective: LogReg = log-loss with L2; KNN = no training objective, majority vote weighted by distance.
+- The loss or objective: log-loss (cross-entropy) with L2 regularisation.
 - Student-test Top-1, F1 and log loss (from `results/model_comparison.csv`).
 - Over- or underfitting evidence: compare the CV score with the student-test score.
 
@@ -166,4 +153,4 @@ To do:
 - After Monty posts "HMM preds ready", make maps for 3 student_test trips → `results/maps/*.html`, and take screenshots (PNG) for the PDF.
 
 ## Viva prep
-How the files relate (track → nodes/arcs → route), the data-quality issues you found, why degrees aren't distances (haversine), LogReg vs KNN (linear boundary vs similarity, why scaling matters, why KNN is slow), and how to read the Folium maps.
+How the files relate (track → nodes/arcs → route), the data-quality issues you found, why degrees aren't distances (haversine), Logistic Regression (linear decision boundary, what C does, why scaling matters, why its probabilities are well calibrated), and how to read the Folium maps.

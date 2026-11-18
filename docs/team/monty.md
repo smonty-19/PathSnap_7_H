@@ -9,7 +9,7 @@ You push **only** to:
 - `scripts/`
 - `configs/`
 - `evaluation/hmm_eval.py`
-- `models/train_svm.py`, plus the outputs of your own SVM runs in `results/`
+- `models/train_knn.py`, plus the outputs of your own KNN runs in `results/`, `report/sections/3_models_knn.md`
 - `README.md`, `requirements.txt`, `.gitignore`, `CONTRIBUTING.md`, `docs/`
 - `results/candidates_sweep.csv`, `results/hmm_comparison.csv`, `results/hmm_tuning.csv`, `results/preds/hmm_*.parquet`
 - `report/sections/2_2_eda.md` (preprocessing/features part, shared with Patil), `report/sections/5_hmm.md`
@@ -24,8 +24,8 @@ Always run `git pull --rebase origin main` before `git push origin main`, and `g
 | M2 | HMM + Viterbi + evaluation | `pathsnap/hmm.py`, `evaluation/hmm_eval.py`, `configs/hmm.yaml` | 2 | final route, report §5 |
 | M3 | Single-trip inference pipeline | `pathsnap/pipeline.py` | 2 | Sanchita's API |
 | M4 | README, integration, repo audit | `README.md` | 2 | submission |
-| M5 | Kernel SVM model | `models/train_svm.py` | 1–2 (after the parquet + harness) | model comparison |
-| R | Report: preprocessing/candidates/features part of §2.2, all of §5 (HMM), SVM subsection in §3.2 | `report/sections/` | 2 | — |
+| M5 | KNN model | `models/train_knn.py` | 1–2 (after the parquet + harness) | model comparison |
+| R | Report: preprocessing/candidates/features part of §2.2, all of §5 (HMM), KNN subsection in §3.2 | `report/sections/` | 2 | — |
 
 ---
 
@@ -83,25 +83,20 @@ Test it on all 10 student_test trips (time per trip must be OK for a live demo, 
 - README covers: setup (venv + `pip install -r requirements.txt`), data placement, how to rebuild features, train each model, tune, run HMM eval, start the API (Laptop 1), start the UI (Laptop 2), firewall note, and folder map.
 - Audit before submission: grep for hardcoded trip IDs and arc lists, make sure no evaluator data is in git, make sure every report number exists in `results/`.
 
-## M5: Kernel SVM (`models/train_svm.py`)
+## M5: KNN (`models/train_knn.py`)
 ```python
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.kernel_approximation import Nystroem
-from sklearn.svm import LinearSVC
-from sklearn.calibration import CalibratedClassifierCV
+from sklearn.neighbors import KNeighborsClassifier
 from models.common import run_experiment
 
-cfg = dict(kernel="rbf", gamma=0.1, n_components=500, C=1.0, class_weight="balanced", calibration="sigmoid")
-est = make_pipeline(
-    StandardScaler(),
-    Nystroem(kernel="rbf", gamma=cfg["gamma"], n_components=cfg["n_components"], random_state=42),
-    CalibratedClassifierCV(LinearSVC(C=cfg["C"], class_weight="balanced"), method="sigmoid", cv=3),
-)
-run_experiment("svm_rbf_nystroem", "Kernel-based", est, cfg, train_sample_frac=0.3)
+for k in [5, 25, 75]:
+    cfg = dict(n_neighbors=k, weights="distance")
+    est = make_pipeline(StandardScaler(), KNeighborsClassifier(**cfg, n_jobs=-1))
+    run_experiment(f"knn_k{k}", "Instance-based", est, cfg, train_sample_frac=0.2)
 ```
-- Try a small grid (gamma ∈ {0.01, 0.1, 1}, C ∈ {0.1, 1, 10}) and keep a table of the results. Optionally add a pure linear SVM (no Nystroem) as an ablation.
-- Report: why a kernel suits the problem (non-linear interaction of distance and heading), the hinge-loss objective, why calibration is needed for log loss and the HMM, the cost of approximating the kernel, and over- or underfitting evidence.
+(KNN is slow at prediction time, which is why it trains on a 20% sample. Mention this in the report.) Pick the best k for the main table.
+- For the report: why similarity in feature space suits the problem, why scaling matters, the objective (none; a distance-weighted majority vote), the inference-time cost, student-test Top-1/F1/log loss, and over- or underfitting evidence (small k overfits, large k underfits; compare CV vs student-test).
 
 ## Dependencies
 - **You depend on:** nothing for M0/M1. For M2 you need `results/preds/*` from the harness (Sanchita) and a chosen model. Until then you can test with LightGBM baseline preds.

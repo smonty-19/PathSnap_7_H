@@ -10,8 +10,6 @@ Training scripts. Every script calls `models.common.run_experiment(...)`. Only e
 | `train_lgbm.py` | **Sanchita**: LightGBM baseline |
 | `tune_lgbm_optuna.py` | **Sanchita**: Bayesian optimisation (Optuna TPE) |
 | `train_logreg.py` | **Patil**: Logistic Regression |
-| `train_knn.py` | **Patil**: KNN (distance-weighted) |
-| `train_gnb.py` | **Patil** (optional): Gaussian Naive Bayes |
 | `train_rf.py` | **Sheetal**: Random Forest |
 | `train_mlp.py` | **Sheetal**: MLP + real train/val loss curves |
-| `train_svm.py` | **Monty**: Kernel SVM (Nystroem RBF + calibrated linear SVM) |
+| `train_knn.py` | **Monty**: KNN (distance-weighted) |
